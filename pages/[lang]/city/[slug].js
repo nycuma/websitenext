@@ -192,6 +192,7 @@ CityTemplate.getInitialProps = async ctx => {
   return {
     siteTitle: slug,
     siteDescription: 'some description',
+    content,
     ...data,
   }
 }
