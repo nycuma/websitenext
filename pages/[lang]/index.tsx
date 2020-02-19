@@ -18,7 +18,7 @@ import Events from '../../components/Events'
 import StarRateIcon from '@material-ui/icons/StarRate'
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople'
 import SchoolIcon from '@material-ui/icons/School'
-import { mediaquery } from '../../style/style.js'
+import { mediaquery } from '../../style/style'
 
 export const Index: NextPage = () => {
   const { t, locale } = useTranslation()
@@ -48,7 +48,6 @@ export const Index: NextPage = () => {
         )
       )
     ).then(jsons => {
-      console.log('j', jsons)
       const mixEvents = flatten(jsons.map(({ data }) => data.splice(0, 10)))
       mixEvents.sort(
         (a, b) => Date.parse(a.local_date) - Date.parse(b.local_date)
@@ -78,14 +77,11 @@ export const Index: NextPage = () => {
       <TextSection>
         <Grid container justify='space-between'>
           <Grid item xs={12} md={5}>
-            <h1>{t('homepage.otsInitiative.title')}</h1>
+            <h2>{t('homepage.otsInitiative.title')}</h2>
             <p>{t('homepage.otsInitiative.description')}</p>
-            <br />
             <p>{t('homepage.otsInitiative.description2')}</p>
-            <br />
-            <br />
             <Link href={`/[lang]/about`} as={`/${locale}/about`}>
-              <a>{t('homepage.otsInitiative.learnMore')}</a>
+              <a className='link'>{t('homepage.otsInitiative.learnMore')}</a>
             </Link>
           </Grid>
           <Grid item xs={12} md={5}>
@@ -100,12 +96,10 @@ export const Index: NextPage = () => {
             <div className='placeholder'></div>
           </Grid>
           <Grid item xs={12} md={5}>
-            <h1>{t('homepage.otsCommunity.title')}</h1>
+            <h2>{t('homepage.otsCommunity.title')}</h2>
             <p>{t('homepage.otsCommunity.description')}</p>
-            <br />
-            <br />
             <Link href={`/[lang]/community`} as={`/${locale}/community`}>
-              <a>{t('homepage.otsCommunity.learnMore')}</a>
+              <a className='link'>{t('homepage.otsCommunity.learnMore')}</a>
             </Link>
           </Grid>
         </Grid>
@@ -114,44 +108,44 @@ export const Index: NextPage = () => {
       <TextSection classname='grey' title={t('homepage.waysToJoin.title')}>
         <Grid container justify='space-between' spacing={10}>
           <Grid item xs={12} md={4}>
-            <div className='round-icon'>
-              <SchoolIcon
-                style={{ fontSize: 170, color: 'white', marginTop: '10px' }}
-              />
-            </div>
-            <h3>{t('homepage.waysToJoin.learner.title')}</h3>
-            <p className='ways-to-join'>
-              {t('homepage.waysToJoin.learner.description')}
-              <br />
-              <br />
+            <div className='ways-to-join-wrapper'>
+              <div className='round-icon'>
+                <SchoolIcon
+                  style={{ fontSize: 170, color: 'white', marginTop: '10px' }}
+                />
+              </div>
+              <h3>{t('homepage.waysToJoin.learner.title')}</h3>
+              <p className='ways-to-join'>
+                {t('homepage.waysToJoin.learner.description')}
+              </p>
               <Button href=''>{t('homepage.waysToJoin.learner.cta')}</Button>
-            </p>
+            </div>
           </Grid>
           <Grid item xs={12} md={4}>
-            <div className='round-icon'>
-              <StarRateIcon style={{ fontSize: 200, color: 'white' }} />
-            </div>
-            <h3>{t('homepage.waysToJoin.support.title')}</h3>
-            <p className='ways-to-join'>
-              {t('homepage.waysToJoin.support.description')}
-              <br />
-              <br />
+            <div className='ways-to-join-wrapper'>
+              <div className='round-icon'>
+                <StarRateIcon style={{ fontSize: 200, color: 'white' }} />
+              </div>
+              <h3>{t('homepage.waysToJoin.support.title')}</h3>
+              <p className='ways-to-join'>
+                {t('homepage.waysToJoin.support.description')}
+              </p>
               <Button href=''>{t('homepage.waysToJoin.support.cta')}</Button>
-            </p>
+            </div>
           </Grid>
           <Grid item xs={12} md={4}>
-            <div className='round-icon'>
-              <EmojiPeopleIcon
-                style={{ fontSize: 180, color: 'white', marginTop: '10px' }}
-              />
-            </div>
-            <h3>{t('homepage.waysToJoin.coach.title')}</h3>
-            <p className='ways-to-join'>
-              {t('homepage.waysToJoin.coach.description')}
-              <br />
-              <br />
+            <div className='ways-to-join-wrapper'>
+              <div className='round-icon'>
+                <EmojiPeopleIcon
+                  style={{ fontSize: 180, color: 'white', marginTop: '10px' }}
+                />
+              </div>
+              <h3>{t('homepage.waysToJoin.coach.title')}</h3>
+              <p className='ways-to-join'>
+                {t('homepage.waysToJoin.coach.description')}
+              </p>
               <Button href=''>{t('homepage.waysToJoin.coach.cta')}</Button>
-            </p>
+            </div>
           </Grid>
         </Grid>
       </TextSection>
@@ -178,8 +172,17 @@ export const Index: NextPage = () => {
       <SocialMediaSection />
 
       <style jsx>{`
-        .ways-to-join {
+        .link {
           text-align: center;
+          display: block;
+        }
+
+        .ways-to-join-wrapper {
+          text-align: center;
+        }
+
+        .ways-to-join {
+          margin-bottom: 30px;
         }
 
         h3 {
@@ -201,22 +204,26 @@ export const Index: NextPage = () => {
           margin: 0 auto;
           text-align: center;
           border-radius: 200px;
+          margin-bottom: 12px;
         }
 
         .chapter-events {
-          display: none;
+          font-family: var(--secondaryFont);
+          font-weight: 500;
+          font-size: 22px;
+          color: #828282;
+          text-align: center;
+          text-transform: uppercase;
+          margin-top: 40px;
         }
 
         @media (${mediaquery.tabletToDesktop}) {
-          .chapter-events {
-            display: block;
-            font-family: var(--secondaryFont);
-            font-weight: 500;
-            font-size: 22px;
-            color: #828282;
-            text-align: center;
-            text-transform: uppercase;
-            margin-top: 40px;
+          .a {
+            text-align: left;
+          }
+
+          .ways-to-join {
+            margin-bottom: 36px;
           }
         }
       `}</style>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Icon from '@material-ui/core/Icon'
+import { mediaquery } from '../../style/style'
 
 const WrappedIcon = props => <Icon {...props} />
 WrappedIcon.muiName = 'Icon'
@@ -22,7 +23,7 @@ export default function TextSection({
   children,
 }: TextSectionProps) {
   const showTitle = title ? (
-    <h1>
+    <h2>
       {title}
       {iconDirection === 'center' ? (
         <div className='iconCenter'>
@@ -34,27 +35,30 @@ export default function TextSection({
         </span>
       )}
       <style jsx>{`
-        h1 {
-          text-align: center;
-        }
-
-        :global(.pink) h1 {
+        :global(.pink) h2 {
           color: white;
           padding-top: 0;
         }
 
-        .icon :global(span) {
-          font-size: 50px;
-          line-height: 60px;
-          margin-left: 20px;
+        .icon :global(span),
+        .iconCenter :global(span) {
+          display: none;
         }
 
-        .iconCenter :global(span) {
-          font-size: 50px;
-          margin-top: 20px;
+        @media (${mediaquery.tabletToDesktop}) {
+          .icon :global(span) {
+            font-size: 50px;
+            line-height: 60px;
+            margin-left: 20px;
+          }
+
+          .iconCenter :global(span) {
+            font-size: 50px;
+            margin-top: 20px;
+          }
         }
       `}</style>
-    </h1>
+    </h2>
   ) : (
     ''
   )
@@ -84,7 +88,7 @@ export default function TextSection({
           padding: 40px 50px;
         }
 
-        .grey h1 {
+        .grey h2 {
           padding-top: 0;
         }
 
