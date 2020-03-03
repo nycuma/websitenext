@@ -5,7 +5,7 @@ import useTranslation from '../../hooks/useTranslation'
 import TextSection from './TextSection'
 import matter from 'gray-matter'
 
-export default function ChapterSection({ title }) {
+export default function ChapterSection({ title, showOnlyInactiveChapters }) {
   const { locale, t } = useTranslation()
 
   const cities = (ctx => {
@@ -30,20 +30,22 @@ export default function ChapterSection({ title }) {
 
   return (
     <TextSection title={title} anchor='find-events'>
-      <h4>{t('chapter.active')}</h4>
-
+      <h4>{t(`chapter.${showOnlyInactiveChapters ? 'in' : ''}active`)}</h4>
       <Grid container justify='space-around'>
         {cities &&
-          cities.map(({ document: { data } }) => (
-            <Grid item key={data.slug}>
-              <Link
-                href={`/[lang]/city/[slug]`}
-                as={`/${locale}/city/${data.slug}`}
-              >
-                <a>{data.title}</a>
-              </Link>
-            </Grid>
-          ))}
+          cities.map(({ document: { data } }) =>
+            !showOnlyInactiveChapters ||
+            (showOnlyInactiveChapters && data.is_inactive === true) ? (
+              <Grid item key={data.slug}>
+                <Link
+                  href={`/[lang]/city/[slug]`}
+                  as={`/${locale}/city/${data.slug}`}
+                >
+                  <a>{data.title}</a>
+                </Link>
+              </Grid>
+            ) : null
+          )}
       </Grid>
 
       <style jsx>{`
@@ -73,5 +75,6 @@ export default function ChapterSection({ title }) {
 }
 
 ChapterSection.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  showOnlyInactiveChapters: PropTypes.bool,
 }

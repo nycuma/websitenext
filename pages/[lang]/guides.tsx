@@ -6,6 +6,7 @@ import LocalSwitcher from '../../components/LocalSwitcher/LocalSwitcher'
 import useTranslation from '../../hooks/useTranslation'
 import WithLocale from '../../containers/withLocale'
 import TextSection from '../../components/Section/TextSection'
+import ChapterSection from '../../components/Section/ChapterSection'
 
 const Guides: NextPage = () => {
   const { t, locale } = useTranslation()
@@ -55,6 +56,7 @@ const Guides: NextPage = () => {
             >
               How to coach at a co-learning meetup
             </Link>
+            <br />
             <Link
               href={`/[lang]/guides#request-event`}
               as={`/${locale}/guides#request-event`}
@@ -169,6 +171,20 @@ const Guides: NextPage = () => {
             attending can help you create this environment.
           </li>
         </ul>
+      </TextSection>
+
+      <TextSection classname='grey' anchor='inactive-chapters'>
+        <Grid container justify='space-between'>
+          <Grid item xs={12}>
+            <h2>Inactive chapters</h2>
+            <p>
+              Some text some text some text some text some text some text
+              some text some text some text some text some text some text
+              some text some text some text some text some text some text
+            </p>
+            <ChapterSection showOnlyInactiveChapters={true} />
+          </Grid>
+        </Grid>
       </TextSection>
 
       <TextSection>
