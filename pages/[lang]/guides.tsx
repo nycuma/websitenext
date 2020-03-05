@@ -178,9 +178,10 @@ const Guides: NextPage = () => {
           <Grid item xs={12}>
             <h2>Inactive chapters</h2>
             <p>
-              Some text some text some text some text some text some text
-              some text some text some text some text some text some text
-              some text some text some text some text some text some text
+              Check out if someone has already started a meetup in your city in
+              the past that has gone inactive. You&apos;ll find some contact
+              information on the city page. Maybe you can team up and revive the
+              meetup!
             </p>
             <ChapterSection showOnlyInactiveChapters={true} />
           </Grid>
